@@ -8,14 +8,6 @@ Execution:
 <br>
 Sample Output<br>
 responderA 0.3$ ./responderA.py --run isolate_instance --aws_account ******* --region us-east-1 --instance_id i-***********<br>
-                                     _            ___ <br>
-                                    | |          / _ \ <br>
- _ __ ___  ___ _ __   ___  _ __   __| | ___ _ __/ /_\ \ <br>
-| '__/ _ \/ __| '_ \ / _ \| '_ \ / _` |/ _ \ '__|  _  | <br>
-| | |  __/\__ \ |_) | (_) | | | | (_| |  __/ |  | | | | <br>
-|_|  \___||___/ .__/ \___/|_| |_|\__,_|\___|_|  \_| |_/ <br>
-              | |                                       <br>
-              |_|                                       <br>
 Running isolate_instance().. <br>
 vpc_id identified: vpc-58b62f20<br>
 New IR Security Group created: sg-09662bd35222660a6<br>
