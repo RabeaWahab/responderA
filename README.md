@@ -4,7 +4,7 @@ It consits of different modules each designed to execute a certain response: <br
 <b>Isolate_Instance module:</b>
 
 Execution:
-./responderA.py --run isolate_instance --aws_account <Account NUmber> --region <Region> --instance_id <ID> <br>
+./responderA.py --run isolate_instance --aws_account <Account NUmber> --region <Region> --instance_id <ID><br>
 <br>
 Sample Output<br>
 responderA 0.3$ ./responderA.py --run isolate_instance --aws_account ******* --region us-east-1 --instance_id i-***********<br>
@@ -24,9 +24,9 @@ Image: ami-03c54f801d13340fd is pending<br>
 Image: ami-03c54f801d13340fd is available<br>
 Saving revert log to: revert_logs_folder/revert_log20180914-131714.json<br>
 To revert the response run:<br>
-./responderA.py --run revert_response --revert_log revert_logs_folder/revert_log20180914-131714.json<br>
+<b>./responderA.py --run revert_response --revert_log revert_logs_folder/revert_log20180914-131714.json</b><br>
 responderA 0.3$<br>
 <br>
-block_cidr module:<br>
+  <b>block_cidr module:</b>
 <br>
-./responderA.py --run block_cidr --cidr <172.16.1.1/24><br>
+  <b>./responderA.py --run block_cidr --cidr <172.16.1.1/24></b><br>
