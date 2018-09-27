@@ -1,0 +1,6 @@
+{
+"revert_metadata":[
+{ "type": "acl", "aws_account": "523256993465","region": "us-east-1", "acl_id": "acl-76fee60e","rule_number": 3},
+{ "type": "acl", "aws_account": "523256993465","region": "us-east-1", "acl_id": "acl-045fba261fae47a28","rule_number": 3},
+{ "type": "acl", "aws_account": "523256993465","region": "us-east-1", "acl_id": "acl-0f2f9fdd51f44a81c","rule_number": 3}
+]}

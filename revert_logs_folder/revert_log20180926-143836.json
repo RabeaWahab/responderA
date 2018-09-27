@@ -1,0 +1,14 @@
+{
+ "revert_metadata": [
+ {
+ "type": "isolate_instance",
+ "aws_account": "523256993465",
+ "region": "us-east-1",
+ "instance_id": "i-0126be5ee97f65b96",
+ "old_sg_groups": 
+	[{"GroupName": "CTF-Access", "GroupId": "sg-0c3e8b276780b0573"}, {"GroupName": "default", "GroupId": "sg-399f294c"}, {"GroupName": "CTF-ELB", "GroupId": "sg-0b728be742556d6da"}],
+ "image_id": "ami-078a7704b37cdf8bf",
+ "ir_sg_id": "sg-05fa541c647013f19"
+ }
+ ]
+ }
