@@ -2,17 +2,9 @@ import sys
 import boto3
 import time
 
-class isolate_instance:
+import action
 
-    def __init__(self,instance_id, region, aws_account,revert_log, assumedRoleObject):
-        
-        self.revert_log=revert_log
-        self.assumedRoleObject=assumedRoleObject
-        self.instance_id=instance_id
-        self.region=region
-        self.aws_account=aws_account
-
-        return 
+class isolate_instance(action.action):
 
     def create_ir_security_group(self):
         ec2 = boto3.resource('ec2',
@@ -95,8 +87,12 @@ class isolate_instance:
         revert_log="{\n \"revert_metadata\": [\n {\n \"type\": \"isolate_instance\",\n \"aws_account\": \"" + self.aws_account + "\",\n \"region\": \""+ self.region + "\",\n \"instance_id\": \"" + self.instance_id + "\",\n \"old_sg_groups\": \n\t" + str(self.old_sg_groups) + ",\n \"image_id\": \"" + self.image.image_id + "\",\n \"ir_sg_id\": \"" + self.sg.group_id + "\"\n }\n ]\n }\n"
         
         return revert_log
-   
-    def  revert_isolate_instance(self):
+
+    def  revert_isolate_instance(self,revert_log):
+
+        self.revert_log=revert_log
+        self.assumedRoleObject=self.assume_role(revert_log['aws_account'],self.role)
+
         print("Running revert_isolate_instance().. ")
 
         ec2 = boto3.resource('ec2',
@@ -137,7 +133,12 @@ class isolate_instance:
         print("AMI: %s was NOT removed" %(self.revert_log['image_id']))
         return
 
-    def isolate_instance(self):
+    def isolate_instance(self,instance_id, region, aws_account):
+        self.instance_id=instance_id
+        self.region=region
+        self.aws_account=aws_account
+        self.assumedRoleObject=self.assume_role(aws_account,self.role)
+
         print("Running isolate_instance().. ")
         self.create_ir_security_group()
         self.create_ami_image()
