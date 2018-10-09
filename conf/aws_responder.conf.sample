@@ -2,7 +2,10 @@
     "global_conf": [
         {
             "revert_logs_folder": "revert_logs",
-            "assume_role": "sts-role"
+            "assume_role": "sts-role",
+            "revert_logs_role": "role",
+            "revert_logs_account": "333333",
+            "revert_logs_bucket": "bucker_name"
         }  
     ],
     "isolate_instance": [
@@ -12,7 +15,7 @@
     ],
     "waf_ipset": [
         {
-            "aws_account": "777777777",
+            "aws_account": "888888",
             "region": "us-east-1",
             "ip_set": "black_list"
         }  
