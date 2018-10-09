@@ -4,20 +4,21 @@ import time
 import datetime
 import json
 
-import aws
+import action
 
-class block_cidr:
+class block_cidr(action.action):
 
-	def revert_block_cidr_acl(self, revert_log, assumedRoleObject):
+	def revert_block_cidr_acl(self, revert_log):
 		print("Running revert_block_cidr_acl().. ")
-	
+		self.assumedRoleObject=self.assume_role(revert_log['aws_account'],self.role)
+		
 		print ("Removing: " + str(revert_log))
 
 		ec2 = boto3.resource('ec2',
 			region_name=revert_log['region'],
-			aws_access_key_id = assumedRoleObject['Credentials']['AccessKeyId'],
-			aws_secret_access_key = assumedRoleObject['Credentials']['SecretAccessKey'],
-			aws_session_token = assumedRoleObject['Credentials']['SessionToken']
+			aws_access_key_id = self.assumedRoleObject['Credentials']['AccessKeyId'],
+			aws_secret_access_key = self.assumedRoleObject['Credentials']['SecretAccessKey'],
+			aws_session_token = self.assumedRoleObject['Credentials']['SessionToken']
 			)
 		network_acl = ec2.NetworkAcl(revert_log['acl_id'])
 
@@ -36,19 +37,18 @@ class block_cidr:
 
 		return
 
-	def block_cidr_acl(self , cidr , conf):
+	def block_cidr_acl(self , cidr):
 
 		print("Running block_cidr_acl().. ")
 
 		revert_log="{\n\"revert_metadata\":[\n"
 
-		for acl in conf['acl_ids']:
+		for acl in self.conf['acl_ids']:
 			aws_account = acl['aws_account']
 			region = acl['region']
 			acl_id = acl['acl_id']	
 			#assume role
-			role=conf['global_conf'][0]['assume_role']
-			assumedRoleObject=aws.assume_role(aws_account,role)
+			assumedRoleObject=self.assume_role(aws_account,self.role)
 			ec2 = boto3.resource('ec2',
 				region_name=region,
 				aws_access_key_id = assumedRoleObject['Credentials']['AccessKeyId'],
