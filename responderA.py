@@ -33,6 +33,7 @@ def revert_response(revert_log):
             action = block_cidr.block_cidr()
             action.conf = action.load_conf(conf_file)
             action.revert_block_cidr_acl(log)
+
         elif log['type'] == "isolate_instance":
             action=isolate_instance.isolate_instance()
             action.conf=action.load_conf(conf_file)
@@ -67,6 +68,7 @@ elif args.run == "block_cidr":
     action.conf = action.load_conf(conf_file)
     revert_log = action.block_cidr_acl(args.cidr)
     print(action.save_revert_log_file(revert_log,sys.argv[0]))
+    action.upload_to_s3(action.revert_log_file, action.revert_logs_bucket)
     
 elif args.run == "revert_response":
     revert_response(args.revert_log)
